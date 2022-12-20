@@ -4,6 +4,7 @@ const app=express()
 const dotenv=require('dotenv')
 const cors=require('cors')
 const authRouter=require('./routes/auth')
+const homeRouter=require('./routes/home')
 dotenv.config()
 
 app.use(express.json())
@@ -12,6 +13,7 @@ app.use(cors())
  .then(()=>console.log('connected to db')
  )
  app.use('/auth',authRouter)
+ app.use('/',homeRouter)
 app.listen(5000,()=>{
     console.log('server started at port 50000');
 })
