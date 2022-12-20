@@ -4,7 +4,7 @@ const { number } = require("sharp/lib/is");
 const DetailsSchema = new mongoose.Schema(
   {
     username: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
+    email: { type: String, required: true, },
     mobile: { type: Number, required: true },
     age: { type: Number, required: true },
     date:{type:String,required:true}

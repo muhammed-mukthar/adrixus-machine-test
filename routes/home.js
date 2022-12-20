@@ -1,5 +1,16 @@
 const router = require("express").Router();
 const DetailsModel=require('../model/DetailsSchema')
+
+router.post('/',async(req,res)=>{
+    try{
+       const details=await DetailsModel.create(req.body)
+        res.json({data:details})
+    }catch(err){
+        res.json({err:err})
+    }
+})
+
+
 router.get('/',async (req, res) => {
     try {
       var limit = 5;
@@ -22,12 +33,10 @@ router.get('/',async (req, res) => {
           },
           {
             email: { $regex: ".*" + search + ".*", $options: "i" },
-          }, {
-            mobile: { $regex: ".*" + search + ".*", $options: "i" },
-          },
+          }
         ],
       })
-        .sort({ sortvalue: -1 })
+        .sort({ sortvalue: 1 })
         .limit(8)
         .skip((page - 1) * limit)
         .exec();
