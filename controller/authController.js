@@ -1,6 +1,12 @@
 
 const userModel=require('../model/UserSchema')
 const bcrypt=require('bcrypt')
+const jwt = require('jsonwebtoken');
+
+function generateJWT(payload, secret) {
+  return jwt.sign(payload, secret);
+}
+
 
 
 exports.RegisterController=async(req,res)=>{

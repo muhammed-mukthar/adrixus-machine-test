@@ -15,17 +15,18 @@ router.get('/',async (req, res) => {
     try {
       var limit = 5;
       var page = 1;
-      let sortvalue='updatedAt'
+      let sortvalue=''
       if (req.query.page) {
         page = req.query.page;
       }
-      if (req.query.sortvalue) {
-        sortvalue = req.query.sortvalue;
+      if (req.query.sort) {
+        sortvalue = req.query.sort;
       }
       var search = "";
       if (req.query.search) {
         search = req.query.search;
       }
+let totalCount= (await DetailsModel.find()).length
       let detailsinfo = await DetailsModel.find({
         $or: [
           {
@@ -36,10 +37,10 @@ router.get('/',async (req, res) => {
           }
         ],
       })
-        .sort({ sortvalue: 1 })
         .limit(8)
         .skip((page - 1) * limit)
         .exec();
+console.log(totalCount,sortvalue);
 
         res.json({data:detailsinfo})
     }catch(err){
